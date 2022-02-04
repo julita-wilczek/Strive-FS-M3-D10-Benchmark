@@ -235,7 +235,10 @@
             const alert = document.querySelector("#successAlert")
             alert.classList.remove("d-none")
             alert.innerText = alertMessage
-            window.setTimeout(function(){location.reload(true)},3000)
+            if (movieID) {
+              window.setTimeout(function(){location.href = '/Main-index.html'},500)
+            } else {window.setTimeout(function(){location.reload(true)},3000)}
+            
            } else{ 
                document.querySelector("form").className = "was-validated"
         }

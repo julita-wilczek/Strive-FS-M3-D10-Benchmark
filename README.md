@@ -1,9 +1,9 @@
-# Strive-FS-M3-D10-Benchmark
+# Responsive Netflix homepage
  
 Project based on Netflix project from Strive-FS-M2-D5 repository. 
 Code was revised and improved wherever possible.
 
-It adds back office to the previous project and makes the project responsive using APIs.
+It adds backoffice to the previous project and makes the project responsive using APIs.
 
 Features:
 - Movies generated dynamically using API

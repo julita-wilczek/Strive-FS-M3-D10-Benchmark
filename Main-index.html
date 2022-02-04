@@ -180,7 +180,7 @@ margin-bottom: 0px!important;
             <a class="nav-link" href="#">Recently Added</a>
           </li>
         <li class="nav-item active">
-            <a class="nav-link" href="#">My List</a>
+            <a class="nav-link" href="/backoffice.html">My List</a>
           </li>
       </ul>
       <img src="./img/icons8-ricerca.svg" class="lens" alt="lens image">
@@ -204,8 +204,8 @@ margin-bottom: 0px!important;
             Genres
           </button>
           <div class="dropdown-menu "  aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="?Animation">Animation</a>
-            <a class="dropdown-item" href="?Comedy">Comedy</a>
+            <a class="dropdown-item" href="?genre=Animation">Animation</a>
+            <a class="dropdown-item" href="?genre=Comedy">Comedy</a>
             <a class="dropdown-item" href="?genre=Drama">Drama</a>
             <a class="dropdown-item" href="?genre=Romance">Romance</a>
           </div>
@@ -218,9 +218,9 @@ margin-bottom: 0px!important;
     </header>
     
     <h4 class="mb-3 mt-5">Trending Now</h4>
-    <section class="container-fluid">
+    <section  class="container-fluid">
       
-      <div class="row  ">
+      <div id="trending" class="row">
 
         <div class="col-12 col-sm-3 col-md-2 px-1 mb-2 mb-md-0 animated">
           <img class="img fluid w-100 main-image "src="./assets/media/media1.jpg" alt="film 1">
@@ -374,20 +374,41 @@ margin-bottom: 0px!important;
 </div>
 </center>
 
-
-
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"crossorigin="anonymous"></script>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const genre = urlParams.get("genre");
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-    -->
+  window.onload = async () => {
+        try {
+          const movieData = await fetch("https://striveschool-api.herokuapp.com/api/movies/"+genre, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhYTQ4MDgyZWExZDAwMTViYjA1NWQiLCJpYXQiOjE2NDM4MTYwNjQsImV4cCI6MTY0NTAyNTY2NH0.NufHuuX8g0HI0LZVamJvMuYm2a82QnHqM1itLwL2MuU",
+            },
+          });
+          if (genre) {
+            const genreMovies = await movieData.json();
+            console.log(genreMovies)
+            let trendingDiv = document.querySelector("#trending")
+            trendingDiv.innerHTML = ""
+            genreMovies.forEach(movie => {
+              trendingDiv.innerHTML += ` <div class="col-12 col-sm-3 col-md-2 px-1 mb-2 mb-md-0 animated">
+          <a href="/backoffice.html?movieID=${movie._id}&genre=${movie.category}" target="null"><img class="img fluid w-100 main-image  "src="${movie.imageUrl}" alt="${movie.name} image"></a>
+        </div>`
+              
+            });
+      
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+
+</script>
   </body>
 </html>

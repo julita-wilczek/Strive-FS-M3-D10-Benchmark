@@ -1,4 +1,4 @@
-# Strive Netflix homepage
+# Strive Netflix updated
 Repository for Strive School Full Stack Course work, Module 2 Day 10 (February 4, 2022)
 
 Project based on Netflix project from Strive-FS-M2-D5 repository.\

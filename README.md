@@ -1,9 +1,7 @@
-# Strive Netflix updated
+# Strive Netflix copy
 Repository for Strive School Full Stack Course work, Module 2 Day 10 (February 4, 2022)
 
-Project based on Netflix project from Strive-FS-M2-D5 repository.\
-Code was revised and improved wherever needed.\
-It uses advanced javascript, AJAX (async/await), API, Boostrap.\
+It uses advanced javascript, AJAX (async/await), API, Boostrap.
 
 Please note: The app API requests uses Token Based Authentication to secure access to the contents. Tokens are valid for 14 days. Last updated: April 18, 2022.
 
